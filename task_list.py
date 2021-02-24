@@ -38,16 +38,45 @@ def task_print_out(task_list, task_name):
     for task in task_list:
         if task["description"] == task_name:
             full_task = task
+            break
     return full_task
 
+def mark_task_complete(task_list, task_name):
+    count = 0
+    for task in task_list:
+        if task["description"] == task_name:
+            task_list[count]["completed"] = True
+        count += 1
+    return 
+
+def add_task(task_list, task_name, task_complete, task_time):
+    task_list.append({ "description": task_name, "completed": task_complete, "time_taken": task_time })
+    return
+
+print("\n")
+print(f"Today's tasks are: {task_descriptions(tasks)}")
 print(f"Uncompleted tasks: {uncompleted_tasks(tasks)}")
 print(f"Completed tasks: {completed_tasks(tasks)}")
-print(f"Today's tasks are: {task_descriptions(tasks)}")
+print("\n")
 
 # adjust task time to fetch different tasks from list
 task_time = 10
-print(f"Short tasks ({task_time} minutes or less): {tasks_less_than_time(tasks, task_time)}")
+print(f"ALL short tasks ({task_time} minutes or less): {tasks_less_than_time(tasks, task_time)}")
+print("\n")
 
 # set a task name to see full details
 task = "Make Dinner"
 print(f"{task} detail: {task_print_out(tasks, task)}")
+print("\n")
+
+# mark task as complete
+task_complete = "Feed Cat"
+mark_task_complete(tasks, task_complete)
+print(f"Marked {task_complete} as complete.")
+print(f"Uncompleted tasks: {uncompleted_tasks(tasks)}")
+print("\n")
+
+# add extra task
+print("Adding 'Have Bath' to task list")
+add_task(tasks, "Have Bath", False, 45)
+print(f"Today's tasks are: {task_descriptions(tasks)}")
