@@ -29,7 +29,7 @@ def all_task_descriptions(tasks_list):
 def tasks_greater_than_time(task_list, time):
     long_tasks = []
     for task in task_list:
-        if task["time_taken"] <= time:
+        if task["time_taken"] >= time:
             long_tasks.append(task["description"])
     return long_tasks
 
@@ -86,7 +86,7 @@ while running:
         print(task_print_out(tasks, task_name))
     elif user_input == "7":
         task_name = input("Enter task name: ")
-        task_time = input("How long with this take?: ")
+        task_time = int(input("How long with this take?: "))
         add_task(tasks, task_name, task_time)
     elif user_input == "m" or user_input == "M":
         display_menu()
