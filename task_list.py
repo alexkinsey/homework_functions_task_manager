@@ -26,12 +26,12 @@ def all_task_descriptions(tasks_list):
         task_descriptions.append(task["description"])
     return task_descriptions
 
-def tasks_less_than_time(task_list, time):
-    short_tasks = []
+def tasks_greater_than_time(task_list, time):
+    long_tasks = []
     for task in task_list:
         if task["time_taken"] <= time:
-            short_tasks.append(task["description"])
-    return short_tasks
+            long_tasks.append(task["description"])
+    return long_tasks
 
 def task_print_out(task_list, task_name):
     full_task = "Task not found."
@@ -47,36 +47,48 @@ def mark_task_complete(task_list, task_name):
         if task["description"] == task_name:
             task_list[count]["completed"] = True
         count += 1
-    return 
 
-def add_task(task_list, task_name, task_complete, task_time):
-    task_list.append({ "description": task_name, "completed": task_complete, "time_taken": task_time })
-    return
+def add_task(task_list, task_name, task_time):
+    task_list.append({ "description": task_name, "completed": False, "time_taken": task_time })
 
-print("\n")
-print(f"Today's tasks are: {all_task_descriptions(tasks)}")
-print(f"Uncompleted tasks: {uncompleted_tasks(tasks)}")
-print(f"Completed tasks: {completed_tasks(tasks)}")
-print("\n")
+def display_menu():
+    print("\nMenu:")
+    print("1: Display All Tasks")
+    print("2: Display Uncompleted Tasks")
+    print("3: Display Completed Tasks")
+    print("4: Mark Task as Complete")
+    print("5: Get Tasks Which Take Longer Than a Given Time")
+    print("6: Find Task by Description")
+    print("7: Add a new Task to list")
+    print("M or m: Display this menu")
+    print("Q or q: Quit")
 
-# adjust task time to fetch different tasks from list
-task_time = 10
-print(f"ALL short tasks ({task_time} minutes or less): {tasks_less_than_time(tasks, task_time)}")
-print("\n")
+running = True
+display_menu()
 
-# set a task name to see full details
-task = "Make Dinner"
-print(f"{task} detail: {task_print_out(tasks, task)}")
-print("\n")
+while running:
+    user_input = input("\nMake a selection: ")
 
-# mark task as complete
-task_complete = "Feed Cat"
-mark_task_complete(tasks, task_complete)
-print(f"Marked {task_complete} as complete.")
-print(f"Uncompleted tasks: {uncompleted_tasks(tasks)}")
-print("\n")
-
-# add extra task
-print("Adding 'Have Bath' to task list")
-add_task(tasks, "Have Bath", False, 45)
-print(f"Today's tasks are: {all_task_descriptions(tasks)}")
+    if user_input == "1":
+        print(all_task_descriptions(tasks))
+    elif user_input == "2":
+        print(uncompleted_tasks(tasks))
+    elif user_input == "3":
+        print(completed_tasks(tasks))
+    elif user_input == "4":
+        mark_complete = input("Which task would you like to mark as complete?: ")
+        mark_task_complete(tasks, mark_complete)
+    elif user_input == "5":
+        task_length = int(input("Type a time: "))
+        print(tasks_greater_than_time(tasks, task_length))
+    elif user_input == "6":
+        task_name = input("Enter a task name for details: ")
+        print(task_print_out(tasks, task_name))
+    elif user_input == "7":
+        task_name = input("Enter task name: ")
+        task_time = input("How long with this take?: ")
+        add_task(tasks, task_name, task_time)
+    elif user_input == "m" or user_input == "M":
+        display_menu()
+    elif user_input == "q" or user_input == "Q":
+        running = False
