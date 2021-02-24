@@ -20,7 +20,7 @@ def completed_tasks(tasks_list):
             completed_tasks.append(task["description"])
     return completed_tasks
 
-def task_descriptions(tasks_list):
+def all_task_descriptions(tasks_list):
     task_descriptions = []
     for task in tasks_list:
         task_descriptions.append(task["description"])
@@ -54,7 +54,7 @@ def add_task(task_list, task_name, task_complete, task_time):
     return
 
 print("\n")
-print(f"Today's tasks are: {task_descriptions(tasks)}")
+print(f"Today's tasks are: {all_task_descriptions(tasks)}")
 print(f"Uncompleted tasks: {uncompleted_tasks(tasks)}")
 print(f"Completed tasks: {completed_tasks(tasks)}")
 print("\n")
@@ -79,4 +79,4 @@ print("\n")
 # add extra task
 print("Adding 'Have Bath' to task list")
 add_task(tasks, "Have Bath", False, 45)
-print(f"Today's tasks are: {task_descriptions(tasks)}")
+print(f"Today's tasks are: {all_task_descriptions(tasks)}")
