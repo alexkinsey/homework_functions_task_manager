@@ -42,11 +42,8 @@ def task_print_out(task_list, task_name):
     return full_task
 
 def mark_task_complete(task_list, task_name):
-    count = 0
-    for task in task_list:
-        if task["description"] == task_name:
-            task_list[count]["completed"] = True
-        count += 1
+    task = task_print_out(task_list, task_name)
+    task["completed"] = True
 
 def add_task(task_list, task_name, task_time):
     task_list.append({ "description": task_name, "completed": False, "time_taken": task_time })
